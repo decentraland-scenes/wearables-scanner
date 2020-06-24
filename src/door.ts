@@ -25,17 +25,6 @@ export default class Door extends Entity {
     if (open) {
       this.open = open
     }
-
-    messageBus.on('openDoor', ({ sender }) => {
-      if (!this.open) {
-        this.toggle(true)
-      }
-    })
-    messageBus.on('closeDoor', ({ sender }) => {
-      if (this.open) {
-        this.toggle(false)
-      }
-    })
   }
 
   toggle(value: boolean, playSound = true) {

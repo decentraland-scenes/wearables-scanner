@@ -45,3 +45,14 @@ sceneMessageBus.on('scanapprove', () => {
 sceneMessageBus.on('scanreject', () => {
   scanner.reject()
 })
+
+sceneMessageBus.on('openDoor', ({ sender }) => {
+  if (!door.open) {
+    door.toggle(true)
+  }
+})
+sceneMessageBus.on('closeDoor', ({ sender }) => {
+  if (door.open) {
+    door.toggle(false)
+  }
+})
