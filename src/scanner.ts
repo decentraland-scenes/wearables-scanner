@@ -55,7 +55,7 @@ export class WearablesScanner extends Entity {
           log('triggered scanner')
           messageBus.emit('scanning', {})
 
-          triggerEntity.addComponent(
+          triggerEntity.addComponentOrReplace(
             new utils.Delay(4000, () => {
               if (checkWearableCategory(filter)) {
                 messageBus.emit('scanapprove', {})
