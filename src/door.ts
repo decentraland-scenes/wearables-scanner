@@ -1,35 +1,56 @@
+let invisibleMaterial = new Material()
+invisibleMaterial.albedoColor = new Color4(0, 0, 0, 0)
+
 export default class Door extends Entity {
+  isOpen: boolean = false
+  openAnim: AnimationState
+  closeAnim: AnimationState
+  invisibleWall: BoxShape
   openClip = new AudioClip('sounds/open.mp3')
   closeClip = new AudioClip('sounds/close.mp3')
-  open: boolean = false
 
   constructor(
+    model: GLTFShape,
     pos: TranformConstructorArgs,
-    messageBus: MessageBus,
-    open?: boolean
+    openAnim: string,
+    closeAnim: string,
+    open?: boolean,
+    invisibleWall?: boolean,
+    invisibleWallTransform?: TranformConstructorArgs
   ) {
     super()
     this.addComponent(new Transform(pos))
+    this.addComponent(model)
     engine.addEntity(this)
 
     const animator = new Animator()
-    const closeClip = new AnimationState('Close', { looping: false })
-    const openClip = new AnimationState('Open', { looping: false })
-    animator.addClip(closeClip)
-    animator.addClip(openClip)
+    this.openAnim = new AnimationState(openAnim, { looping: false })
+    this.closeAnim = new AnimationState(closeAnim, { looping: false })
+    animator.addClip(this.closeAnim)
+    animator.addClip(this.openAnim)
     this.addComponent(animator)
-    openClip.stop()
-
-    this.addComponent(new GLTFShape('models/Door_Fantasy.glb'))
+    this.openAnim.stop()
 
     if (open) {
-      this.open = open
+      this.isOpen = open
+      this.openAnim.play()
+    }
+
+    if (invisibleWall == true) {
+      let invisibleWallEntity = new Entity()
+      invisibleWallEntity.addComponent(new Transform(invisibleWallTransform))
+      this.invisibleWall = new BoxShape()
+      invisibleWallEntity.addComponent(this.invisibleWall)
+      this.invisibleWall.isPointerBlocker = true
+      this.invisibleWall.withCollisions = true
+      invisibleWallEntity.addComponent(invisibleMaterial)
+      engine.addEntity(invisibleWallEntity)
     }
   }
 
   toggle(value: boolean, playSound = true) {
-    if (this.open === value) return
-    this.open = value
+    if (this.isOpen === value) return
+    this.isOpen = value
 
     if (playSound) {
       const source = new AudioSource(value ? this.openClip : this.closeClip)
@@ -38,11 +59,15 @@ export default class Door extends Entity {
     }
 
     const animator = this.getComponent(Animator)
-    const openClip = animator.getClip('Open')
-    const closeClip = animator.getClip('Close')
-    openClip.stop()
-    closeClip.stop()
-    const clip = value ? openClip : closeClip
+
+    this.openAnim.stop()
+    this.closeAnim.stop()
+    const clip = value ? this.openAnim : this.closeAnim
     clip.play()
+
+    if (this.invisibleWall) {
+      this.invisibleWall.isPointerBlocker = !value
+      this.invisibleWall.withCollisions = !value
+    }
   }
 }

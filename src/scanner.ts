@@ -30,21 +30,22 @@ export class WearablesScanner extends Entity {
     this.getComponent(Animator).addClip(this.allowAnim)
     this.getComponent(Animator).addClip(this.rejectAnim)
 
-    if (!triggerPos) {
-      triggerPos = { position: new Vector3(0, 1.5, 2) }
-    }
-
     if (!triggerScale) {
       triggerScale = new Vector3(2.5, 2.5, 2.5)
     }
 
-    const triggerEntity = new Entity()
-    triggerEntity.setParent(this)
-    triggerEntity.addComponent(new Transform(triggerPos))
+    const scannerTriggerEntity = new Entity()
+
+    if (!triggerPos) {
+      triggerPos = { position: new Vector3(0, 1.5, 2) }
+      scannerTriggerEntity.setParent(this)
+    }
+
+    scannerTriggerEntity.addComponent(new Transform(triggerPos))
 
     let triggerBox = new utils.TriggerBoxShape(triggerScale, Vector3.Zero())
 
-    triggerEntity.addComponent(
+    scannerTriggerEntity.addComponent(
       new utils.TriggerComponent(
         triggerBox, //shape
         0, //layer
@@ -55,7 +56,7 @@ export class WearablesScanner extends Entity {
           log('triggered scanner')
           messageBus.emit('scanning', {})
 
-          triggerEntity.addComponentOrReplace(
+          scannerTriggerEntity.addComponentOrReplace(
             new utils.Delay(4000, () => {
               if (checkWearableCategory(filter)) {
                 messageBus.emit('scanapprove', {})
@@ -71,6 +72,8 @@ export class WearablesScanner extends Entity {
         false
       )
     )
+
+    engine.addEntity(scannerTriggerEntity)
     //this.addComponent(new AudioSource(new AudioClip('sounds/click.mp3')))
   }
 
