@@ -6,6 +6,9 @@ export class WearablesScanner extends Entity {
   scanAnim: AnimationState
   allowAnim: AnimationState
   rejectAnim: AnimationState
+  scanAudio: AudioClip = new AudioClip('sounds/LaserHum.mp3')
+  allowAudio: AudioClip = new AudioClip('sounds/accept.mp3')
+  rejectAudio: AudioClip = new AudioClip('sounds/access_denied.mp3')
   constructor(
     position: TranformConstructorArgs,
     filter: Category,
@@ -74,7 +77,6 @@ export class WearablesScanner extends Entity {
     )
 
     engine.addEntity(scannerTriggerEntity)
-    //this.addComponent(new AudioSource(new AudioClip('sounds/click.mp3')))
   }
 
   public scan(): void {
@@ -82,20 +84,29 @@ export class WearablesScanner extends Entity {
     this.rejectAnim.stop()
     this.scanAnim.stop()
     this.scanAnim.play()
-    //this.getComponent(AudioSource).playOnce()
+    let thisScanner = this
+    this.addComponentOrReplace(
+      new AudioSource(thisScanner.scanAudio)
+    ).playOnce()
   }
 
   public approve(): void {
     this.scanAnim.stop()
     this.allowAnim.stop()
     this.allowAnim.play()
-    //this.getComponent(AudioSource).playOnce()
+    let thisScanner = this
+    this.addComponentOrReplace(
+      new AudioSource(thisScanner.allowAudio)
+    ).playOnce()
   }
 
   public reject(): void {
     this.scanAnim.stop()
     this.rejectAnim.stop()
     this.rejectAnim.play()
-    //this.getComponent(AudioSource).playOnce()
+    let thisScanner = this
+    this.addComponentOrReplace(
+      new AudioSource(thisScanner.rejectAudio)
+    ).playOnce()
   }
 }
