@@ -21,7 +21,7 @@ export class WearablesScanner extends Entity {
     super()
     engine.addEntity(this)
 
-    this.addComponent(new GLTFShape('models/Wearable-Reader.glb'))
+    this.addComponent(new GLTFShape('models/scanner/Wearable-Reader.glb'))
     this.addComponent(new Transform(position))
 
     this.addComponent(new Animator())
@@ -60,8 +60,9 @@ export class WearablesScanner extends Entity {
           messageBus.emit('scanning', {})
 
           scannerTriggerEntity.addComponentOrReplace(
-            new utils.Delay(4000, () => {
-              if (checkWearableCategory(filter)) {
+            new utils.Delay(4000, async () => {
+              let result = await checkWearableCategory(filter)
+              if (result == true) {
                 messageBus.emit('scanapprove', {})
                 successAction()
               } else {
