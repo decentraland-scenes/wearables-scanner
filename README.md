@@ -18,6 +18,8 @@ You could similarly do different queries, like check for a specific wearable ite
 
 Feel free to reuse the models and code from this scene!
 
+> Note: The crtpyo-utils library is currently a work in progress and has issues that need to be resolved. It's not yet published on npm, but you can copy what's been done in the `package.json` file of this repository.
+
 ## Try it out
 
 **Install the CLI**
