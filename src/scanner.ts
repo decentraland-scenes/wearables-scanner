@@ -1,4 +1,4 @@
-import { checkWearableCategory, Category } from './wearables'
+import { Category, checkWearableCategory } from './wearables'
 import utils from '../node_modules/decentraland-ecs-utils/index'
 
 export class WearablesScanner extends Entity {
@@ -61,7 +61,7 @@ export class WearablesScanner extends Entity {
 
           scannerTriggerEntity.addComponentOrReplace(
             new utils.Delay(4000, async () => {
-              let result = await checkWearableCategory(filter)
+              let result = await checkWearableCategory(Category.Eyewear)
               if (result == true) {
                 messageBus.emit('scanapprove', {})
                 successAction()

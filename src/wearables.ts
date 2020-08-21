@@ -45,11 +45,3 @@ export enum Category {
   TopHead = 'top_head',
   UpperBody = 'upper_body',
 }
-
-export enum Rarity {
-  Epic = 'epic',
-  Legendary = 'legendary',
-  Mythic = 'mythic',
-  Rare = 'rare',
-  Uncommon = 'uncommon',
-}
