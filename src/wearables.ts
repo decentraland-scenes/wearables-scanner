@@ -1,5 +1,5 @@
-import * as cryptoUtils from '../node_modules/decentraland-crypto-utils/avatar/index'
-import * as wearables from '../node_modules/decentraland-crypto-utils/wearable/index'
+import * as cryptoUtils from '../node_modules/@dcl/crypto-utils/avatar/index'
+import * as wearables from '../node_modules/@dcl/crypto-utils/wearable/index'
 
 export async function checkWearableCategory(category: Category) {
   let wearablesList = await wearables.getListOfWearables()

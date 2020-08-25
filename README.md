@@ -40,6 +40,12 @@ $:  dcl start
 
 Any dependencies are installed and then the CLI opens the scene in a new browser tab.
 
+```
+&ENABLE_WEB3
+```
+
+For example, if the URL is `http://127.0.0.1:8000?position=0%2C0&SCENE_DEBUG_PANEL`, make it `http://127.0.0.1:8000?position=0%2C0&SCENE_DEBUG_PANEL&ENABLE_WEB3`
+
 Learn more about how to build your own scenes in our [documentation](https://docs.decentraland.org/) site.
 
 If something doesn’t work, please [file an issue](https://github.com/decentraland-scenes/Awesome-Repository/issues/new).
