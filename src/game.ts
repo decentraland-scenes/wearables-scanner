@@ -1,5 +1,5 @@
 import { Category } from './wearables'
-import utils from '../node_modules/decentraland-ecs-utils/index'
+import * as utils from '@dcl/ecs-scene-utils'
 import { WearablesScanner } from './scanner'
 import { buildScene } from './builderContent'
 import Door from './door'

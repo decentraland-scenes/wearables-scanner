@@ -1,9 +1,8 @@
-import * as cryptoUtils from '../node_modules/@dcl/crypto-utils/avatar/index'
-import * as wearables from '../node_modules/@dcl/crypto-utils/wearable/index'
+import * as crypto from '@dcl/crypto-scene-utils'
 
 export async function checkWearableCategory(category: Category) {
-  let wearablesList = await wearables.getListOfWearables()
-  let equipped = await cryptoUtils.equipedItems()
+  let wearablesList = await crypto.wearable.getListOfWearables()
+  let equipped = await crypto.avatar.equipedItems()
 
   log(wearablesList, equipped)
 

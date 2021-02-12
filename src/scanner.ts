@@ -1,5 +1,5 @@
 import { Category, checkWearableCategory } from './wearables'
-import utils from '../node_modules/decentraland-ecs-utils/index'
+import * as utils from '@dcl/ecs-scene-utils'
 
 export class WearablesScanner extends Entity {
   filter: Category
@@ -49,13 +49,8 @@ export class WearablesScanner extends Entity {
     let triggerBox = new utils.TriggerBoxShape(triggerScale, Vector3.Zero())
 
     scannerTriggerEntity.addComponent(
-      new utils.TriggerComponent(
-        triggerBox, //shape
-        0, //layer
-        0, //triggeredByLayer
-        null, //onTriggerEnter
-        null, //onTriggerExit
-        () => {
+      new utils.TriggerComponent(triggerBox, {
+        onCameraEnter: () => {
           log('triggered scanner')
           messageBus.emit('scanning', {})
 
@@ -72,9 +67,7 @@ export class WearablesScanner extends Entity {
             })
           )
         },
-        null, //onCameraExit
-        false
-      )
+      })
     )
 
     engine.addEntity(scannerTriggerEntity)
