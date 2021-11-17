@@ -1,5 +1,5 @@
 import * as utils from '@dcl/ecs-scene-utils'
-import * as crypto from '@dcl/crypto-scene-utils'
+import { getUserData } from '@decentraland/Identity'
 
 export class WearablesScanner extends Entity {
   filter: string
@@ -20,6 +20,8 @@ export class WearablesScanner extends Entity {
   ) {
     super()
     engine.addEntity(this)
+
+    this.filter = filter
 
     this.addComponent(new GLTFShape('models/scanner/Wearable-Reader.glb'))
     this.addComponent(new Transform(position))
@@ -56,10 +58,16 @@ export class WearablesScanner extends Entity {
 
           scannerTriggerEntity.addComponentOrReplace(
             new utils.Delay(4000, async () => {
-              let result = await crypto.avatar.itemInInventory(
-                this.filter,
-                true
-              )
+              let userData = await getUserData()
+
+              log('Currently wearing: ', userData.avatar.wearables)
+              let result = false
+              for (let wearable of userData.avatar.wearables) {
+                if (wearable === this.filter) {
+                  result = true
+                }
+              }
+
               log('HAS WEARABLE? ', result)
               if (result == true) {
                 messageBus.emit('scanapprove', {})
@@ -106,10 +114,3 @@ export class WearablesScanner extends Entity {
     ).playOnce()
   }
 }
-
-crypto.avatar
-  .itemInInventory('dcl://dcl_launch/razor_blade_upper_body', true)
-  .then((isItemEquiped) => {
-    if (isItemEquiped) log('The Razor Blade jacket is equiped')
-    else log('This item is not equiped')
-  })

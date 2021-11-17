@@ -6,19 +6,14 @@ A simple scene that shows how to fetch player wearable data to match against a c
 
 This scene shows you:
 
-- How to use the crypto utils library
 - How to fetch the wearables currently worn by a player
 - How to handle async functions
 - How to delay an action with the utils library
 - How to define the elements of a scene as game objects, with state and functions
 
-The crypto Utils function makes it a lot simpler to perform blockchain functions. Here we're querying the player's wearable items that are being equipped, and also fetching the full list of Decentraland wearables. We then match both these lists up to obtain more information about each of the wearables that the player has equipped, and check if any of these belongs to the 'eyewear' category.
-
-You could similarly do different queries, like check for a specific wearable item by name, or check for any item of 'mythic' rarity.
+Here we're querying the player's wearable items that are being equipped, and also fetching the full list of Decentraland wearables. We then match both these lists up to obtain more information about each of the wearables that the player has equipped, and check if any of these belongs to the 'eyewear' category.
 
 Feel free to reuse the models and code from this scene!
-
-> Note: The crtpyo-utils library is currently a work in progress and has issues that need to be resolved. It's not yet published on npm, but you can copy what's been done in the `package.json` file of this repository.
 
 ## Try it out
 
