@@ -1,4 +1,3 @@
-import { Category } from './wearables'
 import * as utils from '@dcl/ecs-scene-utils'
 import { WearablesScanner } from './scanner'
 import { buildScene } from './builderContent'
@@ -21,7 +20,7 @@ const door = new Door(
 
 let scanner = new WearablesScanner(
   { position: new Vector3(7, 0, 11) },
-  Category.Eyewear,
+  'urn:decentraland:off-chain:base-avatars:thug_life',
   sceneMessageBus,
   () => {
     sceneMessageBus.emit('openDoor', {})

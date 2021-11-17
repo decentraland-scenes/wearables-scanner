@@ -60,8 +60,6 @@ export default class Door extends Entity {
 
     const animator = this.getComponent(Animator)
 
-    this.openAnim.stop()
-    this.closeAnim.stop()
     const clip = value ? this.openAnim : this.closeAnim
     clip.play()
 

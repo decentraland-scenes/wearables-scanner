@@ -1,8 +1,8 @@
-import { Category, checkWearableCategory } from './wearables'
 import * as utils from '@dcl/ecs-scene-utils'
+import * as crypto from '@dcl/crypto-scene-utils'
 
 export class WearablesScanner extends Entity {
-  filter: Category
+  filter: string
   scanAnim: AnimationState
   allowAnim: AnimationState
   rejectAnim: AnimationState
@@ -11,7 +11,7 @@ export class WearablesScanner extends Entity {
   rejectAudio: AudioClip = new AudioClip('sounds/access_denied.mp3')
   constructor(
     position: TranformConstructorArgs,
-    filter: Category,
+    filter: string,
     messageBus: MessageBus,
     successAction: () => void,
     rejectAction?: () => void,
@@ -56,7 +56,11 @@ export class WearablesScanner extends Entity {
 
           scannerTriggerEntity.addComponentOrReplace(
             new utils.Delay(4000, async () => {
-              let result = await checkWearableCategory(Category.Eyewear)
+              let result = await crypto.avatar.itemInInventory(
+                this.filter,
+                true
+              )
+              log('HAS WEARABLE? ', result)
               if (result == true) {
                 messageBus.emit('scanapprove', {})
                 successAction()
@@ -86,7 +90,6 @@ export class WearablesScanner extends Entity {
 
   public approve(): void {
     this.scanAnim.stop()
-    this.allowAnim.stop()
     this.allowAnim.play()
     let thisScanner = this
     this.addComponentOrReplace(
@@ -96,7 +99,6 @@ export class WearablesScanner extends Entity {
 
   public reject(): void {
     this.scanAnim.stop()
-    this.rejectAnim.stop()
     this.rejectAnim.play()
     let thisScanner = this
     this.addComponentOrReplace(
@@ -104,3 +106,10 @@ export class WearablesScanner extends Entity {
     ).playOnce()
   }
 }
+
+crypto.avatar
+  .itemInInventory('dcl://dcl_launch/razor_blade_upper_body', true)
+  .then((isItemEquiped) => {
+    if (isItemEquiped) log('The Razor Blade jacket is equiped')
+    else log('This item is not equiped')
+  })
