@@ -48,7 +48,7 @@ export class WearablesScanner extends Entity {
 
     scannerTriggerEntity.addComponent(new Transform(triggerPos))
 
-    let triggerBox = new utils.TriggerBoxShape(triggerScale, Vector3.Zero())
+    const triggerBox = new utils.TriggerBoxShape(triggerScale, Vector3.Zero())
 
     scannerTriggerEntity.addComponent(
       new utils.TriggerComponent(triggerBox, {
@@ -58,18 +58,18 @@ export class WearablesScanner extends Entity {
 
           scannerTriggerEntity.addComponentOrReplace(
             new utils.Delay(4000, async () => {
-              let userData = await getUserData()
+              const userData = await getUserData()
 
               log('Currently wearing: ', userData.avatar.wearables)
               let result = false
-              for (let wearable of userData.avatar.wearables) {
+              for (const wearable of userData.avatar.wearables) {
                 if (wearable === this.filter) {
                   result = true
                 }
               }
 
               log('HAS WEARABLE? ', result)
-              if (result == true) {
+              if (result === true) {
                 messageBus.emit('scanapprove', {})
                 successAction()
               } else {
@@ -78,7 +78,7 @@ export class WearablesScanner extends Entity {
               }
             })
           )
-        },
+        }
       })
     )
 
@@ -90,7 +90,7 @@ export class WearablesScanner extends Entity {
     this.rejectAnim.stop()
     this.scanAnim.stop()
     this.scanAnim.play()
-    let thisScanner = this
+    const thisScanner = this
     this.addComponentOrReplace(
       new AudioSource(thisScanner.scanAudio)
     ).playOnce()
@@ -99,7 +99,7 @@ export class WearablesScanner extends Entity {
   public approve(): void {
     this.scanAnim.stop()
     this.allowAnim.play()
-    let thisScanner = this
+    const thisScanner = this
     this.addComponentOrReplace(
       new AudioSource(thisScanner.allowAudio)
     ).playOnce()
@@ -108,7 +108,7 @@ export class WearablesScanner extends Entity {
   public reject(): void {
     this.scanAnim.stop()
     this.rejectAnim.play()
-    let thisScanner = this
+    const thisScanner = this
     this.addComponentOrReplace(
       new AudioSource(thisScanner.rejectAudio)
     ).playOnce()
