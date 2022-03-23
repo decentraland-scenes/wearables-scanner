@@ -8,7 +8,7 @@ export function buildScene() {
   const transform = new Transform({
     position: new Vector3(0, 0, 0),
     rotation: new Quaternion(0, 0, 0, 1),
-    scale: new Vector3(1, 1, 1),
+    scale: new Vector3(1, 1, 1)
   })
   _scene.addComponentOrReplace(transform)
 
@@ -23,7 +23,7 @@ export function buildScene() {
       -8.429369557916289e-8,
       -0.7071068286895752
     ),
-    scale: new Vector3(1.0000152587890625, 1, 1.0000152587890625),
+    scale: new Vector3(1.0000152587890625, 1, 1.0000152587890625)
   })
   cornerStoneBrickWall.addComponentOrReplace(transform2)
   const gltfShape = new GLTFShape(
@@ -46,7 +46,7 @@ export function buildScene() {
       -1.1920805320642103e-7,
       -0.004503994714468718
     ),
-    scale: new Vector3(1.0000159740447998, 1, 1.0000159740447998),
+    scale: new Vector3(1.0000159740447998, 1, 1.0000159740447998)
   })
   cornerStoneBrickWall2.addComponentOrReplace(transform3)
 
@@ -62,7 +62,7 @@ export function buildScene() {
       -8.429368847373553e-8,
       0.7071068286895752
     ),
-    scale: new Vector3(1.0000181198120117, 1, 1.0000181198120117),
+    scale: new Vector3(1.0000181198120117, 1, 1.0000181198120117)
   })
   cornerStoneBrickWall3.addComponentOrReplace(transform4)
 
@@ -78,7 +78,7 @@ export function buildScene() {
       -3.238694636572572e-15,
       -1
     ),
-    scale: new Vector3(1.0000114440917969, 1, 1.0000114440917969),
+    scale: new Vector3(1.0000114440917969, 1, 1.0000114440917969)
   })
   cornerStoneBrickWall4.addComponentOrReplace(transform5)
 
@@ -88,7 +88,7 @@ export function buildScene() {
   const transform6 = new Transform({
     position: new Vector3(10.822892189025879, 0, 2.072402000427246),
     rotation: new Quaternion(0, 0, 0, 1),
-    scale: new Vector3(1.122812271118164, 1, 0.9999998807907104),
+    scale: new Vector3(1.122812271118164, 1, 0.9999998807907104)
   })
   stoneBrickWall.addComponentOrReplace(transform6)
   const gltfShape2 = new GLTFShape(
@@ -105,7 +105,7 @@ export function buildScene() {
   const transform8 = new Transform({
     position: new Vector3(10.5, 0, 9.413106918334961),
     rotation: new Quaternion(0, 0, 0, 1),
-    scale: new Vector3(1, 1, 1),
+    scale: new Vector3(1, 1, 1)
   })
   stoneBrickThreshold.addComponentOrReplace(transform8)
   const gltfShape3 = new GLTFShape(
@@ -126,7 +126,7 @@ export function buildScene() {
       5.924097061157227
     ),
     rotation: new Quaternion(0, 0, 0, 1),
-    scale: new Vector3(1.67344331741333, 1, 1.2725991010665894),
+    scale: new Vector3(1.67344331741333, 1, 1.2725991010665894)
   })
   towerRoof.addComponentOrReplace(transform9)
   const gltfShape4 = new GLTFShape('models/Roof_01/Roof_01.glb')
@@ -148,7 +148,7 @@ export function buildScene() {
   const transform10 = new Transform({
     position: new Vector3(8, 0, 8),
     rotation: new Quaternion(0, 0, 0, 1),
-    scale: new Vector3(1, 1, 1),
+    scale: new Vector3(1, 1, 1)
   })
   entity.addComponentOrReplace(transform10)
 
@@ -158,7 +158,7 @@ export function buildScene() {
   const transform11 = new Transform({
     position: new Vector3(6.374037265777588, 0, 3.6893038749694824),
     rotation: new Quaternion(0, 0, 0, 1),
-    scale: new Vector3(1, 1, 1),
+    scale: new Vector3(1, 1, 1)
   })
   signpostGolden.addComponentOrReplace(transform11)
 

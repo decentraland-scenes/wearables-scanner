@@ -1,4 +1,4 @@
-let invisibleMaterial = new Material()
+const invisibleMaterial = new Material()
 invisibleMaterial.albedoColor = new Color4(0, 0, 0, 0)
 
 export default class Door extends Entity {
@@ -36,8 +36,8 @@ export default class Door extends Entity {
       this.openAnim.play()
     }
 
-    if (invisibleWall == true) {
-      let invisibleWallEntity = new Entity()
+    if (invisibleWall === true) {
+      const invisibleWallEntity = new Entity()
       invisibleWallEntity.addComponent(new Transform(invisibleWallTransform))
       this.invisibleWall = new BoxShape()
       invisibleWallEntity.addComponent(this.invisibleWall)
